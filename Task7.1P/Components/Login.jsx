@@ -1,26 +1,85 @@
-import logo from './logo.svg';
-import './App.css';
-import app from "./utils/firebase"
-import Signup from './routes/Signup';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'semantic-ui-css/semantic.min.css'
-import { Routes, Route } from 'react-router-dom';
-import Login from './routes/Login'
-import Homepage from './Homepage';
-import Navbar from './Navbar';
-import Navigation from './Navigation';
-function App() {
+import Input from "../Input"
+import Button from "../Button"
+import '../Header.css'
+import { useState } from "react"
+import { Link, Navigate, redirect, useLocation, useNavigate } from 'react-router-dom'
+import { signInWithGooglePopup, createuserdocfromAuth, userDocRef, signinAuthUserWithEmailAndPassword } from '../utils/firebase'
+import { reload } from "firebase/auth"
+import Label from "../Label"
+
+function Login() {
+  const navigate = useNavigate()
+  const [error, setError] = useState(null)
+  const [contact, setcontact] = useState({
+    email: '',
+    password: ''
+  })
+  const { email, password } = contact
+  console.log(contact)
+  function handleNavigate() {
+    navigate("/home")
+  }
+  async function handleClick(event) {
+    try {
+      const response = await signinAuthUserWithEmailAndPassword(email, password)
+      console.log(response.user);
+      if (response) { handleNavigate() }
+
+    }
+    catch (error) {
+      if (error = "auth/invalid-login-credentials") {
+        setError("Invalid Credentials")
+      }
+      console.log('error in login', error.message)
+
+    }
+  }
+  function handlepass(event) {
+    const value = event.target.value
+    const name = event.target.name
+
+    setcontact((prevalue) => {
+      return {
+        ...prevalue,
+        [name]: value
+      }
+    })
+  }
   return (
-    <div >
-     <Routes>
-     <Route path='/' element={<Navigation/>}>
-     <Route index element={<Login/>}/>
-     <Route path='/signup' element={<Signup/>}/>
-     <Route path='/login' element={<Login/>}/>
-     <Route path='/home' element={<Homepage/>}/>
-     </Route>
-     </Routes>
-     </div>
-  );
+
+    <div className="header">
+      <button className="my-2 sign_up_btn_shift ">
+        <Link to='/signup'>
+          Signup</Link>
+      </button>
+
+      <br></br>
+      Your Email Id <br></br>
+      <Input
+        name='email'
+        type='email'
+        placeholder='email'
+        onChange={handlepass}
+
+      />
+      <br></br>
+      Your Password <br></br>
+      <Input
+        name='password'
+        type='password'
+        placeholder='password'
+        onChange={handlepass}
+      />
+      <br></br>
+      <Label text={error} />
+
+      <button className="my-2" onClick={handleClick}>
+        Login in
+      </button>
+      <br></br>
+      <br>
+      </br>
+    </div>
+  )
 }
-export default App;
+export default Login
