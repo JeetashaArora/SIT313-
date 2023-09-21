@@ -34,7 +34,7 @@ function Login() {
 
     }
   }
-  function handlepass(event) {
+  function handleLogin(event) {
     const value = event.target.value
     const name = event.target.name
 
@@ -59,7 +59,7 @@ function Login() {
         name='email'
         type='email'
         placeholder='email'
-        onChange={handlepass}
+        onChange={handleLogin}
 
       />
       <br></br>
@@ -68,7 +68,7 @@ function Login() {
         name='password'
         type='password'
         placeholder='password'
-        onChange={handlepass}
+        onChange={handleLogin}
       />
       <br></br>
       <Label text={error} />
