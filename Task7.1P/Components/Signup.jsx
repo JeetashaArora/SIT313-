@@ -8,7 +8,7 @@ import { Navigate } from "react-router-dom"
 import { createAuthUserWithEmailAndPassword, createuserdocfromAuth } from "../utils/firebase"
 function Signup() {
   const navigate = useNavigate()
-  function handlenavigation() {
+    function handlenavigation() {
     navigate("/login")
   }
   const [contact, setcontact] = useState({
@@ -29,7 +29,7 @@ function Signup() {
     }
     try {
       const { user } = await createAuthUserWithEmailAndPassword(email, password)
-      await createuserdocfromAuth(user, { Firstname })
+      await createuserdocfromAuth(user, { Firstname },Lastname)
       console.log(user)
       //Redirection to the login page
       if (user)
@@ -41,7 +41,7 @@ function Signup() {
     }
   }
 
-  function handlepass(event) {
+  function handleSignup(event) {
     const value = event.target.value
     const name = event.target.name
     setcontact((prevalue) => {
@@ -62,7 +62,7 @@ function Signup() {
               name='Firstname'
               type='text'
               placeholder='First name'
-              onChange={handlepass}
+              onChange={handleSignup}
             />
           </div>
           <div className="lastname">
@@ -71,7 +71,7 @@ function Signup() {
               name='Lastname'
               type='text'
               placeholder='Last name'
-              onChange={handlepass}
+              onChange={handleSignup}
 
             />                </div>
           <div className="email">
@@ -80,7 +80,7 @@ function Signup() {
               name='email'
               type='email'
               placeholder='email'
-              onChange={handlepass}
+              onChange={handleSignup}
 
             />                </div>
           <div className="password">
@@ -89,7 +89,7 @@ function Signup() {
               name='password'
               type='password'
               placeholder='password'
-              onChange={handlepass}
+              onChange={handleSignup}
 
             />                </div>
           <div className="confirm-password">
@@ -98,7 +98,7 @@ function Signup() {
               name='confirmPassword'
               type='password'
               placeholder='confirmPassword'
-              onChange={handlepass}
+              onChange={handleSignup}
             />                </div>
         </div>
 
