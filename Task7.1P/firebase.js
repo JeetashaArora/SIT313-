@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import {getAuth ,signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import {getFirestore, doc,  getDoc, setDoc} from 'firebase/firestore'
+import { getAuth, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDrhQnLhZNtaXvbErC9cn7Qryv85y4-X-Q",
@@ -13,51 +13,45 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-  const firebaseapp = initializeApp(firebaseConfig);
-  export const auth=getAuth();
-  export const signInWithGooglePopup =()=> signInWithPopup(auth,provider)
-  export const db =getFirestore();
-  export const createuserdocfromAuth = async(userAuth, additionalInformation ={}) =>
-{
-  if(!userAuth.email) return;
+const firebaseapp = initializeApp(firebaseConfig);
+export const auth = getAuth();
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
+export const db = getFirestore();
+export const createuserdocfromAuth = async (userAuth, additionalInformation = {}, Lastname) => {
+  if (!userAuth.email) return;
 
-  const userDocRef=doc (db, 'users', userAuth.uid);
-  console.log(userDocRef)
+  const userDetails = doc(db, 'users', userAuth.uid);
+  console.log(userDetails)
 
-
-const userSnapShots = await getDoc(userDocRef);
-console.log(userSnapShots)
-console.log(userSnapShots.exists())
-if(!userSnapShots.exists())
-{
-   const {displayName, email} =userAuth
-   const createdAt = new Date();
-   try{
-    await setDoc(userDocRef,{
-   displayName,
-   email,
-   createdAt,
-   ...additionalInformation
-    })
-  }
-    catch(error){
-    console.log('error in creating', error.message)
+  const userSnapShots = await getDoc(userDetails);
+  console.log(userSnapShots)
+  console.log(userSnapShots.exists())
+  if (!userSnapShots.exists()) {
+    const { Firstname, email } = userAuth
+    const createdAt = new Date();
+    try {
+      await setDoc(userDetails, {
+        Firstname,
+        Lastname,
+        email,
+        createdAt,
+        ...additionalInformation
+      })
     }
+    catch (error) {
+      console.log('error in creating', error.message)
+    }
+  }
+  return userDetails;
+}
+export async function createAuthUserWithEmailAndPassword(email, password) {
+  if (!email || !password)
+    return
+  return await createUserWithEmailAndPassword(auth, email, password)
+}
+export async function signinAuthUserWithEmailAndPassword(email, password) {
+  if (!email || !password)
+    return
+  return await signInWithEmailAndPassword(auth, email, password)
+}
 
-   }
-   return userDocRef;
-  }
-  export async function createAuthUserWithEmailAndPassword (email,password)
-  { 
-    if(!email || !password) 
-    return
-    return await createUserWithEmailAndPassword(auth,email,password)
-  }
-  
-  export async function signinAuthUserWithEmailAndPassword (email,password)
-  { 
-    if(!email || !password) 
-    return
-    return await signInWithEmailAndPassword(auth,email,password)
-  }
-    
