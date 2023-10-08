@@ -1,0 +1,16 @@
+.Navbar{
+    width: 100%;
+}
+.navlink{
+    background-color: #8e0f53;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 33.3%;
+    text-decoration-color: black;
+    font-size: large;
+}
+.btn{
+    --bs-btn-bg: #8e0f53;
+  }
