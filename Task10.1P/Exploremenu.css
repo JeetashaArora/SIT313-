@@ -1,0 +1,50 @@
+.menu {
+    background-color: lightpink;
+    position: absolute;
+    bottom: 0;
+}
+
+.mg {
+    width: 1203px;
+    background-color: #0c8484;
+    margin-left: 47px;
+    margin-inline-end: 40px;
+
+}
+
+.ui.grid>.column {
+    margin-left: 1rem;
+    /* Adjust as needed */
+    margin-right: -10rem;
+    /* Adjust as needed */
+}
+
+.text {
+    margin-left: 27.5rem;
+}
+
+.text2 {
+    font-size: medium;
+    font-weight: 800;
+    margin-left: 19.5rem;
+}
+
+.menu {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.note {
+    column-gap: -2px;
+}
+.sign_up {
+    background-color: rgb(200, 200, 200);
+    text-align: center;
+    font-family: monospace;
+    box-shadow: 2px;
+    width: 1200px;
+    margin-top: 230px;
+   
+}
+.form{
+    margin-left: 25px;
+}
