@@ -1,0 +1,9 @@
+.chatContainer {
+    background-image: url("https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNoYXQlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww");
+    /* Additional CSS properties for background */
+    background-size: cover;
+    /* Adjust as needed */
+    background-position: center center;
+    /* Adjust as needed */
+    /* Other CSS properties */
+}
